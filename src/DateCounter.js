@@ -1,9 +1,9 @@
-import { useReducer, useState } from "react";
+import { act, useReducer } from "react";
 
 const dateReducer = (state, action) => {
-  if (action.type === "inc") return state + 1;
+  if (action.type === "inc") return state + action.payLoad;
 
-  if (action.type === "dec") return state - 1;
+  if (action.type === "dec") return state - action.payLoad;
 
   if (action.type === "setCount") return action.payLoad;
 
@@ -29,11 +29,11 @@ function DateCounter() {
   date.setDate(date.getDate() + count);
 
   const dec = function () {
-    dispatch({ type: "dec" });
+    dispatch({ type: "dec", payLoad: step });
   };
 
   const inc = function () {
-    dispatch({ type: "inc" });
+    dispatch({ type: "inc", payLoad: step });
   };
 
   const defineCount = function (e) {
