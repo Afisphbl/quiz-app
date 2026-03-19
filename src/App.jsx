@@ -7,6 +7,7 @@ import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
+import FinishedScreen from "./components/FinishedScreen";
 
 const initialState = {
   questions: [],
@@ -14,6 +15,7 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
+  highscore: 0,
 };
 
 const reducer = (state, action) => {
@@ -44,16 +46,31 @@ const reducer = (state, action) => {
         answer: null,
       };
 
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
+      };
+
+    case "restart":
+      return {
+        ...state,
+        status: "ready",
+        index: 0,
+        answer: null,
+        points: 0,
+      };
+
     default:
       return state;
   }
 };
 
 function App() {
-  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
+  const [{ questions, status, index, answer, points, highscore }, dispatch] =
+    useReducer(reducer, initialState);
 
   const numberOfQuestions = questions.length;
   const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
@@ -74,6 +91,14 @@ function App() {
 
   function onNextHandler() {
     dispatch({ type: "nextQuestion" });
+  }
+
+  function onFinishHandler() {
+    dispatch({ type: "finish" });
+  }
+
+  function onRestartHandler() {
+    dispatch({ type: "restart" });
   }
   return (
     <div className="app">
@@ -103,8 +128,23 @@ function App() {
               onAnswerHandler={onAnswerHandler}
             />
 
-            <NextButton answer={answer} onNextHandler={onNextHandler} />
+            <NextButton
+              index={index}
+              numberOfQuestions={numberOfQuestions}
+              answer={answer}
+              onNextHandler={onNextHandler}
+              onFinishHandler={onFinishHandler}
+            />
           </>
+        )}
+
+        {status === "finished" && (
+          <FinishedScreen
+            points={points}
+            maxPoints={maxPoints}
+            highscore={highscore}
+            onRestartHandler={onRestartHandler}
+          />
         )}
       </Main>
     </div>
