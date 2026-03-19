@@ -5,6 +5,8 @@ import Error from "./components/Error";
 import Main from "./components/Main";
 import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
+import NextButton from "./components/NextButton";
+import Progress from "./components/Progress";
 
 const initialState = {
   questions: [],
@@ -18,10 +20,13 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "dataReceived":
       return { ...state, questions: action.payload, status: "ready" };
+
     case "dataFailed":
       return { ...state, status: "error" };
+
     case "start":
       return { ...state, status: "active" };
+
     case "newAnswer":
       const question = state.questions[state.index];
       const isCorrect = question.correctOption === action.payload;
@@ -31,18 +36,27 @@ const reducer = (state, action) => {
         answer: action.payload,
         points: points,
       };
+
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+      };
+
     default:
       return state;
   }
 };
 
 function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState,
   );
 
   const numberOfQuestions = questions.length;
+  const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
   useEffect(() => {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
@@ -57,6 +71,10 @@ function App() {
   function onAnswerHandler(answer) {
     dispatch({ type: "newAnswer", payload: answer });
   }
+
+  function onNextHandler() {
+    dispatch({ type: "nextQuestion" });
+  }
   return (
     <div className="app">
       <Header />
@@ -70,11 +88,23 @@ function App() {
           />
         )}
         {status === "active" && (
-          <Question
-            question={questions[index]}
-            answer={answer}
-            onAnswerHandler={onAnswerHandler}
-          />
+          <>
+            <Progress
+              index={index}
+              numberOfQuestions={numberOfQuestions}
+              points={points}
+              maxPoints={maxPoints}
+              answer={answer}
+            />
+
+            <Question
+              question={questions[index]}
+              answer={answer}
+              onAnswerHandler={onAnswerHandler}
+            />
+
+            <NextButton answer={answer} onNextHandler={onNextHandler} />
+          </>
         )}
       </Main>
     </div>

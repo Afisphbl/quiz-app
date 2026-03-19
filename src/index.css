@@ -124,6 +124,7 @@ progress {
   display: block;
   font-family: inherit;
   color: inherit;
+  width: max-content;
   font-size: clamp(1.6rem, 2.8vw, 2rem);
   border: 2px solid var(--color-dark);
   background-color: var(--color-dark);
