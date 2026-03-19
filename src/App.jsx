@@ -10,6 +10,8 @@ const initialState = {
   questions: [],
   status: "loading",
   index: 0,
+  answer: null,
+  points: 0,
 };
 
 const reducer = (state, action) => {
@@ -20,13 +22,22 @@ const reducer = (state, action) => {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
+    case "newAnswer":
+      const question = state.questions[state.index];
+      const isCorrect = question.correctOption === action.payload;
+      const points = isCorrect ? state.points + question.points : state.points;
+      return {
+        ...state,
+        answer: action.payload,
+        points: points,
+      };
     default:
       return state;
   }
 };
 
 function App() {
-  const [{ questions, status, index }, dispatch] = useReducer(
+  const [{ questions, status, index, answer }, dispatch] = useReducer(
     reducer,
     initialState,
   );
@@ -42,6 +53,10 @@ function App() {
   function onStartHandler() {
     dispatch({ type: "start" });
   }
+
+  function onAnswerHandler(answer) {
+    dispatch({ type: "newAnswer", payload: answer });
+  }
   return (
     <div className="app">
       <Header />
@@ -54,7 +69,13 @@ function App() {
             onStartHandler={onStartHandler}
           />
         )}
-        {status === "active" && <Question question={questions[index]} />}
+        {status === "active" && (
+          <Question
+            question={questions[index]}
+            answer={answer}
+            onAnswerHandler={onAnswerHandler}
+          />
+        )}
       </Main>
     </div>
   );
