@@ -4,10 +4,12 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import Main from "./components/Main";
 import StartScreen from "./components/StartScreen";
+import Question from "./components/Question";
 
 const initialState = {
   questions: [],
   status: "loading",
+  index: 0,
 };
 
 const reducer = (state, action) => {
@@ -16,13 +18,18 @@ const reducer = (state, action) => {
       return { ...state, questions: action.payload, status: "ready" };
     case "dataFailed":
       return { ...state, status: "error" };
+    case "start":
+      return { ...state, status: "active" };
     default:
       return state;
   }
 };
 
 function App() {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
 
   const numberOfQuestions = questions.length;
   useEffect(() => {
@@ -31,13 +38,23 @@ function App() {
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
+
+  function onStartHandler() {
+    dispatch({ type: "start" });
+  }
   return (
     <div className="app">
       <Header />
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen questionsLen={numberOfQuestions} />}
+        {status === "ready" && (
+          <StartScreen
+            questionsLen={numberOfQuestions}
+            onStartHandler={onStartHandler}
+          />
+        )}
+        {status === "active" && <Question question={questions[index]} />}
       </Main>
     </div>
   );
