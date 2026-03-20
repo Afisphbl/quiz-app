@@ -51,6 +51,20 @@ quiz-app/
 └── README.md
 ```
 
+## Screenshots
+
+[Loading questions](screen-shot/Loading-face.png)
+
+[Error loading questions](screen-shot/Error-face.png)
+
+[Start screen](screen-shot/Starting-face.png)
+
+[Question screen](screen-shot/Question.png)
+
+[Answering a question](screen-shot/Answer-face.png)
+
+[Finished screen](screen-shot/End-face.png)
+
 ## Getting Started
 
 ### 1. Install dependencies
