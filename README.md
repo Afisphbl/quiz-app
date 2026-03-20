@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Future Development
+
+- Let users choose how many questions they want on the start screen, and filter questions by difficulty.
+- Store high score in an API so it can be fetched after refresh and compared with the latest score.
+- Store selected answers in an array so users can move forward and backward through questions.
