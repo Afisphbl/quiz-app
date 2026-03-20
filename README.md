@@ -1,76 +1,108 @@
-# Getting Started with Create React App
+# React Quiz App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive quiz app built with React.
+
+The app fetches quiz questions from a local JSON API, tracks points and high score, shows progress, and includes a countdown timer for the full quiz session.
+
+## Features
+
+- Loads questions from a local API powered by json-server.
+- Start screen with total number of available questions.
+- One question at a time with multiple options.
+- Real-time scoring based on correct answers.
+- Progress indicator and maximum score tracking.
+- Quiz timer with automatic finish when time runs out.
+- Final screen with score, percentage, and restart action.
+
+## Tech Stack
+
+- React
+- useReducer for state management
+- json-server for mock API
+- Create React App tooling
+
+## Project Structure
+
+```text
+quiz-app/
+├── data/
+│   └── questions.json
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── DateCounter.js
+│   │   ├── Error.jsx
+│   │   ├── FinishedScreen.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── Loader.jsx
+│   │   ├── Main.jsx
+│   │   ├── NextButton.jsx
+│   │   ├── Options.jsx
+│   │   ├── Progress.jsx
+│   │   ├── Question.jsx
+│   │   ├── StartScreen.jsx
+│   │   └── Timer.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── index.js
+├── package.json
+└── README.md
+```
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Start the questions API (json-server)
+
+```bash
+npm run server
+```
+
+The API runs at:
+
+http://localhost:8000/questions
+
+### 3. Start the React app
+
+```bash
+npm start
+```
+
+The app runs at:
+
+http://localhost:3000
 
 ## Available Scripts
 
-In the project directory, you can run:
+- npm start: Run the app in development mode.
+- npm run server: Run json-server for quiz questions.
+- npm test: Run tests in watch mode.
+- npm run build: Build production output.
 
-### `npm start`
+## Current App Flow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. App loads and fetches questions.
+2. User starts the quiz.
+3. User answers question-by-question.
+4. App updates points, progress, and timer.
+5. Quiz ends when user finishes or timer reaches zero.
+6. Final score and high score are shown, with a restart option.
 
 ## Future Development
 
-- Let users choose how many questions they want on the start screen, and filter questions by difficulty.
-- Store high score in an API so it can be fetched after refresh and compared with the latest score.
-- Store selected answers in an array so users can move forward and backward through questions.
+- Allow users to choose the number of questions on the start screen.
+- Add difficulty filters (easy, medium, hard) before quiz start.
+- Persist high score in an API and fetch it after refresh to compare against new results.
+- Store user answers in an array to enable both forward and backward navigation.
+
+## Notes
+
+- This project currently uses a local mock API for question data.
+- High score is currently managed in local app state during a session.
