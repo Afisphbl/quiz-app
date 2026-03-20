@@ -53,16 +53,22 @@ quiz-app/
 
 ## Screenshots
 
+*This is the Loading of the application:*
 ![Loading questions](screen-shot/Loading-face.png)
 
+*This is the Error of the application:*
 ![Error loading questions](screen-shot/Error-face.png)
 
+*This is the Starter of the application:*
 ![Start screen](screen-shot/Starting-face.png)
 
+*This is the Question of the application:*
 ![Question screen](screen-shot/Question.png)
 
+*This is the Answering the question of the application:*
 ![Answering a question](screen-shot/Answer-face.png)
 
+*This is the Finished of the application:*
 ![Finished screen](screen-shot/End-face.png)
 
 ## Getting Started
