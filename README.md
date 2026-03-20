@@ -53,17 +53,17 @@ quiz-app/
 
 ## Screenshots
 
-[Loading questions](screen-shot/Loading-face.png)
+![Loading questions](screen-shot/Loading-face.png)
 
-[Error loading questions](screen-shot/Error-face.png)
+![Error loading questions](screen-shot/Error-face.png)
 
-[Start screen](screen-shot/Starting-face.png)
+![Start screen](screen-shot/Starting-face.png)
 
-[Question screen](screen-shot/Question.png)
+![Question screen](screen-shot/Question.png)
 
-[Answering a question](screen-shot/Answer-face.png)
+![Answering a question](screen-shot/Answer-face.png)
 
-[Finished screen](screen-shot/End-face.png)
+![Finished screen](screen-shot/End-face.png)
 
 ## Getting Started
 
