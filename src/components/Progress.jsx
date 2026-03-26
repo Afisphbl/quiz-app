@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useQuiz } from "../context/QuizContext";
 
 function Progress() {
@@ -19,4 +20,4 @@ function Progress() {
   );
 }
 
-export default Progress;
+export default memo(Progress);
